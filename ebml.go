@@ -193,6 +193,12 @@ func (er *mkvReader) GetElements() (Elements, error) {
 }
 
 func (er *mkvReader) ReadData(e *Element) (bs []byte, err error) {
+	r := e.DataRange()
+	s := r.Size()
+	if s > 0 {
+		bs = make([]byte, s)
+		_, err = er.r.ReadAt(bs, r.Start)
+	}
 	return
 }
 
