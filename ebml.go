@@ -207,6 +207,11 @@ func DefaultNested() map[uint32]bool {
 	return map[uint32]bool{
 		ElementEMBL:    true,
 		ElementSegment: true,
+		ElementInfo:    true,
+		ElementTracks:  true,
+		ElementTags:    true,
+		TrackEntry:     true,
+		Tag:            true,
 	}
 }
 

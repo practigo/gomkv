@@ -17,6 +17,16 @@ const (
 	ElementTags        = 0x1254c367
 	ElementChapters    = 0x1043A770
 	ElementAttachments = 0x1941A469
+	// level 2
+	TimestampScale = 0x2AD7B1
+	MuxingApp      = 0x4D80
+	WritingApp     = 0x5741
+	TrackEntry     = 0xAE
+	Tag            = 0x7373
+	// level 3
+	TrackNumber = 0xD7
+	TrackUID    = 0x73C5
+	TrackType   = 0x83
 )
 
 var id2name = map[uint32]string{
@@ -33,8 +43,20 @@ var id2name = map[uint32]string{
 	ElementTags:        "Tags",
 	ElementChapters:    "Chapters",
 	ElementAttachments: "Attachments",
+	// level 2
+	MuxingApp:  "MuxingApp",
+	WritingApp: "WritingApp",
+	TrackEntry: "TrackEntry",
+	Tag:        "Tag",
+	// level 3
+	TrackNumber: "TrackNumber",
+	TrackUID:    "TrackUID",
+	TrackType:   "TrackType",
 }
 
 var isUnicode = map[uint32]bool{
 	ElementDocType: true,
+	//
+	MuxingApp:  true,
+	WritingApp: true,
 }
