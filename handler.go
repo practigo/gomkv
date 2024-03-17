@@ -18,8 +18,17 @@ func View(r EBMLReader) error {
 		dr := e.DataRange()
 		name := id2name[e.ID]
 		prefix := strings.Repeat("--|", int(e.Level+1)) // depth starts from 0
-		eleTreeView = append(eleTreeView, fmt.Sprintf("%s ID: 0x%x(%s) of level %d, size: %d @%d, data:[%d, %d)\n",
-			prefix, e.ID, name, e.Level, e.Size, e.At, dr.Start, dr.End))
+		base := fmt.Sprintf("%s ID: 0x%x(%s) of level %d, size: %d @%d, data:[%d, %d)",
+			prefix, e.ID, name, e.Level, e.Size, e.At, dr.Start, dr.End)
+		if _, ok := isUnicode[e.ID]; ok {
+			data, err := r.ReadData(e)
+			if err != nil {
+				return err
+			}
+			base += fmt.Sprintf(" == \"%s\"", string(data))
+		}
+		eleTreeView = append(eleTreeView, base)
+
 		return nil
 	}
 
@@ -27,6 +36,6 @@ func View(r EBMLReader) error {
 		return err
 	}
 
-	fmt.Println(strings.Join(eleTreeView, ""))
+	fmt.Println(strings.Join(eleTreeView, "\n"))
 	return nil
 }
